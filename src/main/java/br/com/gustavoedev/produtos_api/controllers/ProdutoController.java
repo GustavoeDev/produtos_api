@@ -21,8 +21,20 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<ArrayList<ProdutoEntity>> listarProdutos() {
+    public ResponseEntity<ArrayList<ProdutoEntity>> getProdutos() {
         return ResponseEntity.status(HttpStatus.CREATED).body(produtos);
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<ArrayList<ProdutoEntity>> getProdutoFilter(@RequestParam String nome) {
+        ArrayList<ProdutoEntity> produtosSearch = new ArrayList<>();
+
+        for (ProdutoEntity produto : produtos) {
+            if (produto.getNome().equalsIgnoreCase(nome)) {
+                produtosSearch.add(produto);
+            }
+        }
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(produtosSearch);
     }
 
     @GetMapping("/{id}")
