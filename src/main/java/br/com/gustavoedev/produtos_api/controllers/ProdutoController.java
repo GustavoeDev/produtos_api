@@ -34,14 +34,14 @@ public class ProdutoController {
                 produtosSearch.add(produto);
             }
         }
-        return ResponseEntity.status(HttpStatus.ACCEPTED).body(produtosSearch);
+        return ResponseEntity.status(HttpStatus.OK).body(produtosSearch);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoEntity> getProduto(@PathVariable Long id) {
         for (ProdutoEntity produto : produtos) {
             if (produto.getId().equals(id)) {
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body(produto);
+                return ResponseEntity.status(HttpStatus.OK).body(produto);
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
@@ -55,7 +55,7 @@ public class ProdutoController {
                 produto.setNome(produtoUpdateDTO.getNome());
                 produto.setPreco(produtoUpdateDTO.getPreco());
                 produto.setQuantidade(produtoUpdateDTO.getQuantidade());
-                return ResponseEntity.status(HttpStatus.ACCEPTED).body(produto);
+                return ResponseEntity.status(HttpStatus.OK).body(produto);
             }
         }
         return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
